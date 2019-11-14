@@ -8,7 +8,6 @@ ARCH= -gencode arch=compute_30,code=sm_30 \
       -gencode arch=compute_35,code=sm_35 \
       -gencode arch=compute_50,code=[sm_50,compute_50] \
       -gencode arch=compute_52,code=[sm_52,compute_52]
-#      -gencode arch=compute_20,code=[sm_20,sm_21] \ This one is deprecated?
 
 # This is what I use, uncomment if you know your arch and want to specify
 # ARCH= -gencode arch=compute_52,code=compute_52
@@ -39,10 +38,11 @@ endif
 CFLAGS+=$(OPTS)
 
 ifeq ($(OPENCV), 1) 
-COMMON+= -DOPENCV
+COMMON+= -DOPENCV -I/usr/local/opencv/include -I/usr/local/opencv/include/opencv -I/usr/local/opencv/include/opencv2
 CFLAGS+= -DOPENCV
-LDFLAGS+= `pkg-config --libs opencv` 
-COMMON+= `pkg-config --cflags opencv` 
+#LDFLAGS+= `pkg-config --libs opencv` 
+#COMMON+= `pkg-config --cflags opencv` 
+LDFLAGS+= -L/usr/local/opencv/lib/  -lopencv_stitching -lopencv_cudafeatures2d -lopencv_superres -lopencv_cudaobjdetect -lopencv_cudabgsegm -lopencv_videostab -lopencv_cudacodec -lopencv_cudaoptflow -lopencv_cudalegacy -lopencv_cudawarping -lopencv_cudastereo -lopencv_face -lopencv_photo -lopencv_cudaimgproc -lopencv_cudafilters -lopencv_optflow -lopencv_hdf -lopencv_structured_light -lopencv_phase_unwrapping -lopencv_aruco -lopencv_ccalib -lopencv_surface_matching -lopencv_rgbd -lopencv_bgsegm -lopencv_bioinspired -lopencv_stereo -lopencv_xobjdetect -lopencv_line_descriptor -lopencv_hfs -lopencv_img_hash -lopencv_fuzzy -lopencv_xfeatures2d -lopencv_shape -lopencv_cudaarithm -lopencv_dpm -lopencv_objdetect -lopencv_reg -lopencv_saliency -lopencv_ximgproc -lopencv_calib3d -lopencv_tracking -lopencv_datasets -lopencv_features2d -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_video -lopencv_plot -lopencv_ml -lopencv_flann -lopencv_xphoto -lopencv_imgproc -lopencv_core -lopencv_cudev
 endif
 
 ifeq ($(GPU), 1) 

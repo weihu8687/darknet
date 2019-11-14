@@ -9,11 +9,11 @@ typedef struct{
 } kvp;
 
 
-int read_option(char *s, list *options);
-void option_insert(list *l, char *key, char *val);
-char *option_find(list *l, char *key);
-float option_find_float(list *l, char *key, float def);
-float option_find_float_quiet(list *l, char *key, float def);
-void option_unused(list *l);
+int read_option(char *s, dnlist *options);
+void option_insert(dnlist *l, char *key, char *val);
+char *option_find(dnlist *l, char *key);
+float option_find_float(dnlist *l, char *key, float def);
+float option_find_float_quiet(dnlist *l, char *key, float def);
+void option_unused(dnlist *l);
 
 #endif
